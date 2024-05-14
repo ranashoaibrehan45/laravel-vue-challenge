@@ -25,7 +25,17 @@ This is a github repository for a partial ticketing system. We have very simple 
 
 **General:**
 - If a junior developer submitted this code to you, what would your suggestions be for improvement?
+**Ans:**
+    - Improve the UI
+    - Improve you testing skills
+    - Before submission always test the application if it is working as required.
+	- Always use server side pagination and vue component to evaluate server side pagination 
 - This web application needs to support a mobile app via an API. Please write a short scope of what would be needed and an overview of how you would add this feature.  Provide some suggestions and options as you would if responding to this request from the project owner. The API needs to support username/password auth via a JSON api, and needs to provide CRUD for tickets.
+**Ans:** 
+     - The API needs to be created in Laravel which must returns the response in json format
+	 - We have to keep front-end seperatly
+	 - Front-end can send http requests to API and evaluate the returned json
+	 - For authentication a token will be generated if logged in successfully
 
 Please fork this repository and commit changes following the appropriate standards. Ensure that your modifications adhere to a scalable architecture and principles to accommodate future enhancements and extensions.
 
