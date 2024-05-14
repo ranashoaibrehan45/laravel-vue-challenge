@@ -13,11 +13,28 @@ class TicketsController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $tickets = Ticket::with('user')
-            ->orderBy('created_at', 'desc')
-            ->get();
+        $q = Ticket::with('user');
+
+        if ($request->has('search')) {
+            $q->where('title', 'like', '%'.$request->search.'%')
+                ->orWhere('description', 'like', '%'.$request->search.'%')
+                ->orWhere('status', $request->search)
+                ->orWhere('priority', $request->search);
+        }
+
+        if ($request->has('min_date')) {
+            $q->whereDate('created_at', '>=', $request->min_date);
+        }
+
+        if ($request->has('max_date')) {
+            $q->whereDate('created_at', '<=', $request->max_date);
+        }
+
+        $tickets = $q->orderBy('created_at', 'desc')
+            ->paginate(10);
+
         return inertia('Tickets/Index', [
             'tickets' => $tickets,
         ]);
@@ -40,6 +57,7 @@ class TicketsController extends Controller
 
         $data['user_id'] = auth()->id();
 
+        \Log::info(print_r($data, true));
         Ticket::create($data);
 
         return redirect()->route('tickets.index');

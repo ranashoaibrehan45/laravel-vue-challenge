@@ -21,7 +21,7 @@ class CreateTicketRequest extends FormRequest
      */
     public function rules(): array
     {
-        $this->checkStatus();
+        //$this->checkStatus();
 
         return [
             'title' => 'required',
